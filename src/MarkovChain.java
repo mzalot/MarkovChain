@@ -32,7 +32,6 @@ public class MarkovChain {
         file = new File(storeFileName);
         r = new Random();
         words = "";
-
     }
 
     //read the text
@@ -52,6 +51,12 @@ public class MarkovChain {
             e.printStackTrace();
             didWork = false;
         }
+        System.out.println(words);
         return didWork;
+    }
+
+    //add the words to the dictionary
+    public void addToDictionary(){
+
     }
 }
