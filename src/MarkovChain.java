@@ -21,6 +21,7 @@ public class MarkovChain {
     private String storeFileName;
     private Random r;
     private String words;
+    private Dictionary d;
 
     //default constructor
     //ask for file
@@ -32,6 +33,8 @@ public class MarkovChain {
         file = new File(storeFileName);
         r = new Random();
         words = "";
+        d = new Dictionary();
+
     }
 
     //read the text
@@ -57,6 +60,26 @@ public class MarkovChain {
 
     //add the words to the dictionary
     public void addToDictionary(){
-
+        //store key and value
+        String key = "";
+        //check if key is filled
+        boolean keyFilled = false;
+        String value = "";
+        for(int i = 0;i<words.length();i++){
+            if(words.charAt(i) == ' ' && value != ""){
+                d.put(key,value);
+                System.out.println(key);
+                System.out.println(value);
+                key = value;
+            } else if (words.charAt(i) == ' ' && key != ""){
+                keyFilled = true;
+            } else if(value == "" && words.charAt(i) != ' ' && !keyFilled){
+                key += words.charAt(i);
+                System.out.println("key " + key);
+            } else if (key != "" && words.charAt(i) != ' '){
+                value += words.charAt(i);
+                System.out.println("value" + value);
+            }
+        }
     }
 }
