@@ -13,6 +13,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class MarkovChain {
     //instance data
@@ -23,6 +25,7 @@ public class MarkovChain {
     private String words;
     private Dictionary d;
     private int wordsToGenerate;
+    private String saveFile;
     //create array to store the words in
     String[] wordsArray;
 
@@ -36,6 +39,8 @@ public class MarkovChain {
         r = new Random();
         words = "";
         d = new Dictionary();
+        System.out.println("Enter a file name to store results in: ");
+        saveFile = s.nextLine();
         System.out.println("How many words would you like to generate: ");
         wordsToGenerate = s.nextInt();
         Random r = new Random();
@@ -107,6 +112,15 @@ public class MarkovChain {
             storeText += ((ArrayList)d.get(keyWord)).get(val);
             storeText += " ";
             keyWord = (String)((ArrayList)d.get(keyWord)).get(val);
+        }
+        //save to file
+        try {
+            FileWriter myWriter = new FileWriter(saveFile);
+            myWriter.write(storeText);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
         return storeText;
 
