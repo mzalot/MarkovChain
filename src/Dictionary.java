@@ -55,7 +55,7 @@ public class Dictionary <T, E>{
 
     //size method
     public int size(){
-        return values.size();
+        return keys.size();
     }
     //return a collection of keys
     public Collection<E> keys(){
