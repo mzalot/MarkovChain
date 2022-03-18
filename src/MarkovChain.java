@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class MarkovChain {
     //instance data
@@ -46,8 +47,8 @@ public class MarkovChain {
             Scanner fileReader = new Scanner(file);
             while (fileReader.hasNextLine()) {
                 //space to separate the words
-                words += " ";
                 words += fileReader.nextLine();
+                words += " ";
             }
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
@@ -64,10 +65,30 @@ public class MarkovChain {
         String[] wordsArray;
         //use split method to split the strings
         wordsArray = words.split(" ");
+        //add the words and prefixes to the dictionary
+        for(int i = 0;i<wordsArray.length;i++){
+            //array list to put values in
+            ArrayList<String> values = new ArrayList<String>();
+            if(d.contains(wordsArray[i])){
+                ArrayList<String> storeValue = (ArrayList<String>) d.get(wordsArray[i]);
+                d.remove(wordsArray[i]);
+                storeValue.add(wordsArray[i+1]);
+                d.put(wordsArray[i],storeValue);
+                System.out.println(wordsArray[i]);
+            }  else if(i == wordsArray.length-1){
+                d.put(wordsArray[i], values);
+            } else {
+                values.add(wordsArray[i+1]);
+                d.put(wordsArray[i], values);
+            }
+        }
         //testing
         //for(int i = 0; i<wordsArray.length; i++){
         //    System.out.println(wordsArray[i]);
         //}
+        //testing dictionary
+        System.out.println(d.keys());
+        System.out.println(d.values());
     }
 
 }
