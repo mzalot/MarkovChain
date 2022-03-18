@@ -60,26 +60,14 @@ public class MarkovChain {
 
     //add the words to the dictionary
     public void addToDictionary(){
-        //store key and value
-        String key = "";
-        //check if key is filled
-        boolean keyFilled = false;
-        String value = "";
-        for(int i = 0;i<words.length();i++){
-            if(words.charAt(i) == ' ' && value != ""){
-                d.put(key,value);
-                System.out.println(key);
-                System.out.println(value);
-                key = value;
-            } else if (words.charAt(i) == ' ' && key != ""){
-                keyFilled = true;
-            } else if(value == "" && words.charAt(i) != ' ' && !keyFilled){
-                key += words.charAt(i);
-                System.out.println("key " + key);
-            } else if (key != "" && words.charAt(i) != ' '){
-                value += words.charAt(i);
-                System.out.println("value" + value);
-            }
-        }
+        //create array to store the words in
+        String[] wordsArray;
+        //use split method to split the strings
+        wordsArray = words.split(" ");
+        //testing
+        //for(int i = 0; i<wordsArray.length; i++){
+        //    System.out.println(wordsArray[i]);
+        //}
     }
+
 }
