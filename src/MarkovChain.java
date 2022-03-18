@@ -108,7 +108,12 @@ public class MarkovChain {
         for(int i = 0; i<wordsToGenerate-1; i++){
             //random to get a random value from each key
             //System.out.println(keyWord + " " + i);
-            int val = r.nextInt(((ArrayList)d.get(keyWord)).size());
+            int val;
+            if(d.contains(keyWord)){
+                val = r.nextInt(((ArrayList)d.get(keyWord)).size());
+            } else{
+                val = 0;
+            }
             storeText += ((ArrayList)d.get(keyWord)).get(val);
             storeText += " ";
             keyWord = (String)((ArrayList)d.get(keyWord)).get(val);
