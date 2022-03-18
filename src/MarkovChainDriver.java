@@ -13,5 +13,6 @@ public class MarkovChainDriver {
         MarkovChain m = new MarkovChain();
         m.readText();
         m.addToDictionary();
+        System.out.println(m.createText());
     }
 }

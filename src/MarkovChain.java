@@ -17,12 +17,14 @@ import java.util.ArrayList;
 public class MarkovChain {
     //instance data
     private Scanner s;
-    private Dictionary dict;
     private File file;
     private String storeFileName;
     private Random r;
     private String words;
     private Dictionary d;
+    private int wordsToGenerate;
+    //create array to store the words in
+    String[] wordsArray;
 
     //default constructor
     //ask for file
@@ -30,11 +32,13 @@ public class MarkovChain {
         s = new Scanner(System.in);
         System.out.println("Enter file name: ");
         storeFileName = s.nextLine();
-        dict = new Dictionary();
         file = new File(storeFileName);
         r = new Random();
         words = "";
         d = new Dictionary();
+        System.out.println("How many words would you like to generate: ");
+        wordsToGenerate = s.nextInt();
+        Random r = new Random();
 
     }
 
@@ -55,14 +59,12 @@ public class MarkovChain {
             e.printStackTrace();
             didWork = false;
         }
-        System.out.println(words);
+        //System.out.println(words);
         return didWork;
     }
 
     //add the words to the dictionary
     public void addToDictionary(){
-        //create array to store the words in
-        String[] wordsArray;
         //use split method to split the strings
         wordsArray = words.split(" ");
         //add the words and prefixes to the dictionary
@@ -71,7 +73,7 @@ public class MarkovChain {
             ArrayList<String> values = new ArrayList<String>();
             if(d.contains(wordsArray[i])){
                 ((ArrayList)d.get(wordsArray[i])).add(wordsArray[i+1]);
-                System.out.println(wordsArray[i]);
+                //System.out.println(wordsArray[i]);
             }  else if(i == wordsArray.length-1){
                 d.put(wordsArray[i], values);
             } else {
@@ -86,6 +88,28 @@ public class MarkovChain {
         //testing dictionary
         //System.out.println(d.keys());
         //System.out.println(d.values());
+    }
+
+    //create text
+    public String createText(){
+        //generate a random value for starting word
+        int randomWord = r.nextInt(wordsArray.length);
+        String start = wordsArray[randomWord];
+        //string to store text in
+        String storeText = start + " ";
+        //string to store current key word
+        String keyWord = start;
+        //loop to add words to create text
+        for(int i = 0; i<wordsToGenerate-1; i++){
+            //random to get a random value from each key
+            //System.out.println(keyWord + " " + i);
+            int val = r.nextInt(((ArrayList)d.get(keyWord)).size());
+            storeText += ((ArrayList)d.get(keyWord)).get(val);
+            storeText += " ";
+            keyWord = (String)((ArrayList)d.get(keyWord)).get(val);
+        }
+        return storeText;
+
     }
 
 }
