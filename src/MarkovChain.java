@@ -70,10 +70,7 @@ public class MarkovChain {
             //array list to put values in
             ArrayList<String> values = new ArrayList<String>();
             if(d.contains(wordsArray[i])){
-                ArrayList<String> storeValue = (ArrayList<String>) d.get(wordsArray[i]);
-                d.remove(wordsArray[i]);
-                storeValue.add(wordsArray[i+1]);
-                d.put(wordsArray[i],storeValue);
+                ((ArrayList)d.get(wordsArray[i])).add(wordsArray[i+1]);
                 System.out.println(wordsArray[i]);
             }  else if(i == wordsArray.length-1){
                 d.put(wordsArray[i], values);
@@ -87,8 +84,8 @@ public class MarkovChain {
         //    System.out.println(wordsArray[i]);
         //}
         //testing dictionary
-        System.out.println(d.keys());
-        System.out.println(d.values());
+        //System.out.println(d.keys());
+        //System.out.println(d.values());
     }
 
 }
