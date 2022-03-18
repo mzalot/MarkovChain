@@ -21,6 +21,7 @@ public class MarkovChain {
     private String storeFileName;
     private Random r;
     private String words;
+    private Dictionary d;
 
     //default constructor
     //ask for file
@@ -32,6 +33,7 @@ public class MarkovChain {
         file = new File(storeFileName);
         r = new Random();
         words = "";
+        d = new Dictionary();
 
     }
 
@@ -52,6 +54,20 @@ public class MarkovChain {
             e.printStackTrace();
             didWork = false;
         }
+        System.out.println(words);
         return didWork;
     }
+
+    //add the words to the dictionary
+    public void addToDictionary(){
+        //create array to store the words in
+        String[] wordsArray;
+        //use split method to split the strings
+        wordsArray = words.split(" ");
+        //testing
+        //for(int i = 0; i<wordsArray.length; i++){
+        //    System.out.println(wordsArray[i]);
+        //}
+    }
+
 }
