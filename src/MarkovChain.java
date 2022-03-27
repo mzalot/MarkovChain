@@ -76,11 +76,11 @@ public class MarkovChain {
         for(int i = 0;i<wordsArray.length;i++){
             //array list to put values in
             ArrayList<String> values = new ArrayList<String>();
-            if(d.contains(wordsArray[i])){
+            if(i == wordsArray.length-1){
+                d.put(wordsArray[i], values);
+            } else if(d.contains(wordsArray[i])){
                 ((ArrayList)d.get(wordsArray[i])).add(wordsArray[i+1]);
                 //System.out.println(wordsArray[i]);
-            }  else if(i == wordsArray.length-1){
-                d.put(wordsArray[i], values);
             } else {
                 values.add(wordsArray[i+1]);
                 d.put(wordsArray[i], values);
@@ -109,11 +109,8 @@ public class MarkovChain {
             //random to get a random value from each key
             //System.out.println(keyWord + " " + i);
             int val;
-            if(d.contains(keyWord)){
-                val = r.nextInt(((ArrayList)d.get(keyWord)).size());
-            } else{
-                val = 0;
-            }
+            int bound = ((ArrayList)d.get(keyWord)).size();
+            val = r.nextInt(bound);
             storeText += ((ArrayList)d.get(keyWord)).get(val);
             storeText += " ";
             keyWord = (String)((ArrayList)d.get(keyWord)).get(val);
